@@ -7,7 +7,7 @@ from db import (
     add_syllabus_topic, get_syllabus_topics, mark_syllabus_completed , delete_syllabus_topic
 )
 
-CATEGORY = ["DSA", "Python", "Web Dev", "Aptitude", "English", "Other"]
+CATEGORY = ["DSA", "Python", "Web Dev", "Aptitude", "English", "SQL", "Django", "Flask" "Other"]
 
 
 # ✅ Sample user credentials (Make sure this is properly defined)
