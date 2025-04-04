@@ -10,7 +10,7 @@ load_dotenv()
 
 # Get MongoDB URI from environment variable
 # MONGO_URI = os.getenv("MONGO_URI")
-MONGO_URI = st.secrets("MONGO_URI")
+MONGO_URI = st.secrets["MONGO_URI"]
 
 # MongoDB Connection
 client = MongoClient(MONGO_URI)
