@@ -3,12 +3,14 @@ from datetime import datetime, timedelta
 from bson import ObjectId
 from dotenv import load_dotenv
 import os
+import streamlit as st
 
 # Load .env file
 load_dotenv()
 
 # Get MongoDB URI from environment variable
-MONGO_URI = os.getenv("MONGO_URI")
+# MONGO_URI = os.getenv("MONGO_URI")
+MONGO_URI = st.secrets("MONGO_URI")
 
 # MongoDB Connection
 client = MongoClient(MONGO_URI)
