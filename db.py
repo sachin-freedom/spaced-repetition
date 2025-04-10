@@ -29,22 +29,27 @@ def get_next_available_date(category, proposed_date):
     return proposed_date
 
 
-def generate_revision_dates(start_date):
+def generate_revision_dates(start_date, category):
     intervals = [1, 3, 10, 16, 25]
     revision_dates = []
 
     for interval in intervals:
+        # Interval is always calculated from the original start_date
         proposed_date = start_date + timedelta(days=interval)
-        final_date = get_next_available_date("CATEGORY_PLACEHOLDER",
-                                             proposed_date)  # Placeholder to be replaced in add_topic
+        final_date = get_next_available_date(category, proposed_date)
+
+        # Make sure this final_date is not already used in previous revision dates (in this session)
+        while final_date.strftime("%Y-%m-%d") in revision_dates:
+            final_date += timedelta(days=1)
+            final_date = get_next_available_date(category, final_date)
+
         revision_dates.append(final_date.strftime("%Y-%m-%d"))
 
     return revision_dates
 
-
 def add_topic(topic, category="Uncategorized"):
     today = datetime.today()
-    revision_dates = generate_revision_dates(today)
+    revision_dates = generate_revision_dates(today, category)
 
     # Now that we know the category, adjust revision dates properly
     revision_dates = [get_next_available_date(category, datetime.strptime(date, "%Y-%m-%d")).strftime("%Y-%m-%d") for
